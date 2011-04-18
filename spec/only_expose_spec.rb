@@ -6,6 +6,7 @@ describe 'OnlyExposer :' do
 
     before :all do
       Foo.only_expose :name, :address
+      @foo = Factory.stub :foo
     end
 
     it 'adds class method only_expose' do
@@ -17,11 +18,11 @@ describe 'OnlyExposer :' do
     end
 
     it 'returns only attributes defined when using to_json' do
-      Foo.first.to_json.should eq '{"foo":{"address":"A Street","name":"James"}}'
+      @foo.to_json.should eq '{"foo":{"address":"A Street","name":"James"}}'
     end
 
     it 'returns only attributes defined when using to_xml' do
-      Foo.first.to_xml.should 
+      @foo.to_xml.should 
       eq '<?xml version="1.0" encoding="UTF-8"?>
           <foo>
             <name>James</name>
@@ -34,10 +35,11 @@ describe 'OnlyExposer :' do
 
     before :all do
       Foo.only_expose :name, :address
+      @bar = Factory.stub :bar
     end
 
     it 'returns its parents specified attributes' do
-      Bar.first.to_json.should eq '{"bar":{"address":"A Street","name":"James"}}'
+      @bar.to_json.should eq '{"bar":{"address":"A Different Street","name":"Timmy"}}'
     end
   end
 
@@ -45,10 +47,11 @@ describe 'OnlyExposer :' do
 
     before :all do
       Bar.only_expose :name
+      @bar = Factory.stub :bar
     end
 
     it 'returns only its specified attributes' do
-      Bar.first.to_json.should eq '{"bar":{"name":"James"}}'
+      @bar.to_json.should eq '{"bar":{"name":"Timmy"}}'
     end
   end
 
