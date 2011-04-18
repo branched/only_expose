@@ -5,7 +5,6 @@ describe 'OnlyExposer :' do
   context 'a parent model' do
 
     before :all do
-      Foo.only_expose :name, :address
       @foo = Factory.stub :foo
     end
 
@@ -34,24 +33,22 @@ describe 'OnlyExposer :' do
   context 'a child model' do 
 
     before :all do
-      Foo.only_expose :name, :address
       @bar = Factory.stub :bar
     end
 
-    it 'returns its parents specified attributes' do
-      @bar.to_json.should eq '{"bar":{"address":"A Different Street","name":"Timmy"}}'
+    it 'returns all its attributes' do
+      @bar.to_json.should eq '{"bar":{"address":"A Different Street","age":18,"id":1002,"name":"Timmy"}}'
     end
   end
 
   context 'an overriding child model' do
 
     before :all do
-      Bar.only_expose :name
-      @bar = Factory.stub :bar
+      @baz = Factory.stub :baz
     end
 
     it 'returns only its specified attributes' do
-      @bar.to_json.should eq '{"bar":{"name":"Timmy"}}'
+      @baz.to_json.should eq '{"baz":{"name":"Gerald"}}'
     end
   end
 

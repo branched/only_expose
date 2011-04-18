@@ -17,11 +17,12 @@ module OnlyExpose
   module ClassMethods
     
     def only_expose(*args)
-      @@exposed_attributes = *args.map
+      @@exposed_attributes ||= {}
+      @@exposed_attributes[name] = *args.map
     end
 
     def exposed_attributes
-      @@exposed_attributes
+      @@exposed_attributes[name]
     end
   end  
 end

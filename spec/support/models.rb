@@ -10,9 +10,15 @@ class Foo < ActiveRecord::Base
   column :name, :string
   column :address, :string
   column :age, :integer
+
+  only_expose :name, :address
 end
 
 class Bar < Foo
+end
+
+class Baz < Foo
+  only_expose :name
 end
 
 Factory.define :foo do |f|
@@ -25,5 +31,10 @@ Factory.define :bar do |f|
   f.name 'Timmy'
   f.age 18
   f.address 'A Different Street'
+end
 
+Factory.define :baz do |f|
+  f.name 'Gerald'
+  f.age 18
+  f.address 'Another City'
 end
