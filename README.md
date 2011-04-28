@@ -13,3 +13,4 @@ model data easier to manage.
 This defines a class Foo which will only expose the attribute 'name'
 when to_json or to_xml is used.
 
+Do as you please license.
