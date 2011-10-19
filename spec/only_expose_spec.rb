@@ -1,12 +1,9 @@
 require 'spec_helper'
 
-describe 'OnlyExposer :' do
+describe 'OnlyExpose :' do
 
   context 'a parent model' do
-
-    before :all do
-      @foo = Factory.stub :foo
-    end
+    let(:foo){Foo.new(:name => 'James' , :address => 'A Street' , :age => '18')}
 
     it 'adds class method only_expose' do
       Foo.public_methods.include? 'only_expose'
@@ -17,11 +14,11 @@ describe 'OnlyExposer :' do
     end
 
     it 'returns only attributes defined when using to_json' do
-      @foo.to_json.should eq '{"foo":{"address":"A Street","name":"James"}}'
+      foo.to_json.should eq '{"foo":{"address":"A Street","name":"James"}}'
     end
 
     it 'returns only attributes defined when using to_xml' do
-      @foo.to_xml.should 
+      foo.to_xml.should 
       eq '<?xml version="1.0" encoding="UTF-8"?>
           <foo>
             <name>James</name>
@@ -30,25 +27,18 @@ describe 'OnlyExposer :' do
     end
   end
 
-  context 'a child model' do 
+  context 'a non overriding child model' do 
+    let(:bar){ Bar.new(:name => 'James' , :address => 'A Street' , :age => '18')}
 
-    before :all do
-      @bar = Factory.stub :bar
-    end
-
-    it 'returns all its attributes' do
-      @bar.to_json.should eq '{"bar":{"address":"A Different Street","age":18,"id":1002,"name":"Timmy"}}'
+    it 'returns all its parents defined attributes' do
+      bar.to_json.should eq '{"bar":{"address":"A Street","name":"James"}}'
     end
   end
 
   context 'an overriding child model' do
-
-    before :all do
-      @baz = Factory.stub :baz
-    end
-
+    let(:baz){ Baz.new(:name => 'Gerald' , :address => 'A Street' , :age => '18')}
     it 'returns only its specified attributes' do
-      @baz.to_json.should eq '{"baz":{"name":"Gerald"}}'
+      baz.to_json.should eq '{"baz":{"name":"Gerald"}}'
     end
   end
 

@@ -1,7 +1,10 @@
 source :rubygems
 
-gem 'rspec'
 gem 'activerecord'
-gem 'factory_girl'
-gem 'rake'
+
+group :test, :development do
+  gem 'rspec'
+  gem 'sqlite3'
+end
+
 

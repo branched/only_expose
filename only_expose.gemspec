@@ -5,9 +5,9 @@ Gem::Specification.new do |s|
   s.name        = "only_expose"
   s.version     = OnlyExpose::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ['charper']
+  s.authors     = ['chrisharper']
   s.email       = []
-  s.homepage    = "https://github.com/charper/only_expose"
+  s.homepage    = "https://github.com/branched/only_expose"
   s.summary     = "Methods to expose only specified attributes in ActiveRecord using the helpers to_json and to_xml"
 
   s.required_rubygems_version = ">= 1.6.2"

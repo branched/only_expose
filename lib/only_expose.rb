@@ -17,12 +17,15 @@ module OnlyExpose
   module ClassMethods
     
     def only_expose(*args)
-      @@exposed_attributes ||= {}
-      @@exposed_attributes[name] = *args.map
+      @exposed_attributes = *args
     end
 
     def exposed_attributes
-      @@exposed_attributes[name]
+      if @exposed_attributes.nil? && self.superclass != ActiveRecord::Base
+         superclass.exposed_attributes
+      else
+        @exposed_attributes
+      end
     end
   end  
 end
