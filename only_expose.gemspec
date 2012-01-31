@@ -14,7 +14,6 @@ Gem::Specification.new do |s|
   s.rubyforge_project         = "only_expose"
 
   s.add_development_dependency "bundler", ">= 1.0.10"
-  s.add_development_dependency "rspec", "~> 2.5"
   s.add_development_dependency "sqlite3-ruby"
   
   s.add_dependency "activerecord", "~> 3.0"
